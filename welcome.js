@@ -26,7 +26,7 @@
  function onKey(event){if(event.key==='Enter'||event.key==='Escape'){event.preventDefault();close(true)}}
  function onMotion(){if(reduced.matches)close(true)}
  document.addEventListener('keydown',onKey);reduced.addEventListener('change',onMotion);
- document.getElementById('welcome-skip').addEventListener('click',()=>close(true));
+ document.getElementById('welcome-skip')?.addEventListener('click',()=>close(true));
  document.addEventListener('DOMContentLoaded',()=>{document.querySelector('.workspace').setAttribute('inert','');timer=setTimeout(()=>close(),3650)},{once:true});
  setTimeout(()=>{if(!overlay.hidden)finish()},6000);
 })();
