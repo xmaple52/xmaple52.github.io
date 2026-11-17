@@ -1,0 +1,32 @@
+html.intro-active { overflow: hidden; }
+#welcome-terminal { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 24px; border: 0; background: #070c09; color: #d9e9dd; overflow: auto; }
+#welcome-terminal[open] { display: grid; place-items: center; }
+#welcome-terminal::backdrop { background: #070c09; }
+.terminal-shell { width: min(100%, 590px); overflow: hidden; border: 1px solid #839f8738; border-radius: 16px; background: radial-gradient(ellipse at 50% 35%, #14241b, #101512 65%); box-shadow: 0 28px 100px #0009; font-family: 'Courier New', monospace; animation: terminal-arrive .6s ease both; }
+.terminal-top { display: flex; align-items: center; gap: 18px; min-height: 48px; padding: 10px 16px; border-bottom: 1px solid #ffffff0c; background: #252c28; }
+.terminal-dots { display: flex; gap: 7px; }
+.terminal-dots i { width: 10px; height: 10px; border-radius: 50%; background: #ff6259; }
+.terminal-dots i:nth-child(2) { background: #ffbd2e; }
+.terminal-dots i:nth-child(3) { background: #28c840; }
+#terminal-name { color: #a1ada6; font-size: 11px; letter-spacing: .04em; }
+#terminal-skip { margin-left: auto; padding: 6px 0 6px 8px; min-height: 32px; border: 0; color: #adbaaf; background: transparent; font: 11px 'Courier New', monospace; cursor: pointer; }
+.terminal-body { padding: 26px 20px 30px; text-align: center; }
+#terminal-leaf { display: inline-block; margin: 0 0 15px; min-height: 288px; color: #9cdb83; text-shadow: 0 0 12px #8fdd6545; font: bold 9px/9px 'Courier New', monospace; letter-spacing: 1px; white-space: pre; user-select: none; animation: leaf-glow 4s ease-in-out infinite; }
+.terminal-lines { font-size: 12px; line-height: 1.9; }
+.terminal-lines p { margin: 0; animation: terminal-line .45s ease both; }
+.terminal-lines p:nth-child(2) { animation-delay: .18s; }
+.terminal-lines p:nth-child(3) { animation-delay: .36s; }
+.terminal-lines span { display: inline-block; min-width: 70px; text-align: right; margin-right: 12px; color: #7c9584; }
+.terminal-ready i { display: inline-block; width: 5px; height: 5px; margin-left: 4px; vertical-align: middle; border-radius: 50%; background: #98db7a; box-shadow: 0 0 9px #8dcf6b70; }
+#terminal-enter { display: block; width: 100%; min-height: 56px; border: 0; margin: 22px 0 0; padding: 12px 8px 0; background: transparent; color: #d8f2ce; font: bold 13px/1.6 'Courier New', monospace; cursor: pointer; }
+#terminal-enter small { display: block; font-size: 10px; color: #718778; font-weight: normal; margin-top: 5px; }
+.terminal-caret { animation: caret-blink 1s step-end infinite; }
+#welcome-terminal.is-leaving { pointer-events: none; animation: terminal-leave .45s ease forwards; }
+#terminal-enter:focus-visible, #terminal-skip:focus-visible { outline: 1px solid #a8dc8a; outline-offset: 4px; border-radius: 5px; }
+@keyframes terminal-arrive { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes terminal-line { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes leaf-glow { 0%, 100% { opacity: .8; filter: brightness(.95); } 50% { opacity: 1; filter: brightness(1.12); } }
+@keyframes caret-blink { 50% { opacity: 0; } }
+@keyframes terminal-leave { to { opacity: 0; transform: scale(1.015); } }
+@media (max-width: 600px) { #welcome-terminal { padding: 14px; } .terminal-top { padding: 10px 12px; gap: 12px; } #terminal-name { font-size: 10px; } .terminal-body { padding: 22px 10px 24px; } #terminal-leaf { font-size: 8px; line-height: 8px; letter-spacing: .5px; min-height: 256px; } #terminal-enter { font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { .terminal-shell, #terminal-leaf, .terminal-lines p, .terminal-caret, #welcome-terminal.is-leaving { animation: none; } }
