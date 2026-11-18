@@ -641,23 +641,36 @@ document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 <script>
 (() => {
-  const name = '@cryptoxmaple';
+  const phrases = ['@cryptoxmaple', 'ZNQ — ♡'];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let position = 0, timer;
-  function type() {
-    if (document.hidden || reduced.matches) { document.title = name; return; }
-    document.title = name.slice(0, ++position);
-    if (position < name.length) timer = setTimeout(type, 150);
+  let phrase = 0, position = 0, deleting = false, timer;
+  function tick() {
+    if (document.hidden || reduced.matches) return;
+    const text = phrases[phrase];
+    position += deleting ? -1 : 1;
+    document.title = text.slice(0, position) || '·';
+    let delay = deleting ? 140 : 260;
+    if (!deleting && position === text.length) {
+      deleting = true;
+      delay = 2200;
+    } else if (deleting && position === 0) {
+      deleting = false;
+      phrase = (phrase + 1) % phrases.length;
+      delay = 550;
+    }
+    timer = setTimeout(tick, delay);
   }
-  function start() {
+  function sync() {
     clearTimeout(timer);
-    if (document.hidden || reduced.matches) { document.title = name; return; }
-    position = 0;
-    type();
+    if (document.hidden || reduced.matches) {
+      document.title = phrases[0];
+    } else {
+      timer = setTimeout(tick, 350);
+    }
   }
-  document.addEventListener('visibilitychange', start);
-  reduced.addEventListener('change', start);
-  start();
+  document.addEventListener('visibilitychange', sync);
+  reduced.addEventListener('change', sync);
+  sync();
 })();
 </script>
 </body>
