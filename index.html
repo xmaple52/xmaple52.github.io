@@ -1,41 +1,635 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@cryptoxmaple — личный сайт</title>
-  <meta name="description" content="xmaple — программирование, личные проекты и разработка игр.">
-  <meta name="theme-color" content="#090e0c">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="xmaple — личный сайт">
-  <meta property="og:description" content="Software development & personal projects. Знакомство с xmaple.">
-  <meta property="og:url" content="https://xmaple52.github.io/">
-  <meta property="og:image" content="https://xmaple52.github.io/assets/avatar.png">
-  <link rel="icon" type="image/png" href="./assets/avatar.png">
-  <link rel="stylesheet" href="./style.css?v=2">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>xmaple — проекты, код, журнал</title>
+<meta name="description" content="xmaple (@cryptoxmaple) — Python, C++, Kotlin. Офлайн-шутер, AI-бот, плагин для AyuGram и exteraGram и exteraGram. Что сделано, что в работе, чем пишу и как это выглядит.">
+<meta name="theme-color" content="#080d0b">
+<link rel="canonical" href="https://xmaple52.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="xmaple">
+<meta property="og:title" content="xmaple — проекты, код, журнал">
+<meta property="og:description" content="Офлайн-шутер, AI-бот, плагин для AyuGram и exteraGram и exteraGram. Что сделано, что в работе, чем пишу.">
+<meta property="og:url" content="https://xmaple52.github.io/">
+
+<meta property="og:image" content="https://xmaple52.github.io/assets/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" href="./assets/avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+
+<style>
+:root{
+  --bg:#080d0b;
+  --panel:#0e1512;
+  --panel-2:#0b1210;
+  --line:rgba(255,255,255,.07);
+  --line-hi:rgba(153,233,122,.26);
+  --mint:#99e97a;
+  --mint-soft:rgba(153,233,122,.10);
+  --text:#eaf1eb;
+  --muted:#89988e;
+  --muted-2:#5d6a61;
+  --radius:18px;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.65 Manrope,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a,button{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--mint);outline-offset:4px;border-radius:6px}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--mint);color:#081008;padding:10px 16px;font-weight:700}
+.skip:focus{left:12px;top:12px}
+
+#particles,.page-glow{position:fixed;inset:0;pointer-events:none;z-index:0}
+#particles{z-index:1}
+.page-glow{
+  z-index:0;
+  background:
+    radial-gradient(760px 460px at 12% -8%,rgba(153,233,122,.10),transparent 70%),
+    radial-gradient(680px 420px at 96% 8%,rgba(96,170,140,.07),transparent 72%);
+}
+
+.workspace{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:26px 20px 40px;display:grid;gap:14px}
+
+.panel{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#101a15,#0c130f);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  transition:border-color .25s ease,transform .25s ease;
+}
+.panel:hover{border-color:var(--line-hi)}
+
+/* ── top ─────────────────────────────── */
+.top-grid{display:grid;grid-template-columns:1.32fr .92fr;gap:14px}
+
+.cover{
+  position:relative;height:128px;padding:16px 20px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(520px 220px at 88% -30%,rgba(153,233,122,.22),transparent 70%),
+    linear-gradient(180deg,#12201a,#0d1713);
+}
+.cover-grid{
+  position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(rgba(153,233,122,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(153,233,122,.10) 1px,transparent 1px);
+  background-size:26px 26px;
+  mask-image:radial-gradient(420px 160px at 20% 0%,#000 20%,transparent 80%);
+  -webkit-mask-image:radial-gradient(420px 160px at 20% 0%,#000 20%,transparent 80%);
+}
+.cover-code, .cover-index{position:relative;font-family:var(--mono)}
+.cover-code{font-size:12px;color:var(--muted);line-height:1.5}
+.cover-code b{display:inline-block;margin-top:4px;color:var(--mint);font-size:17px;font-weight:500}
+.cover-index{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+
+.profile-body{position:relative;padding:0 20px 20px}
+.avatar-wrap{
+  position:relative;width:88px;height:88px;margin-top:-26px;margin-bottom:12px;
+  border-radius:24px;overflow:hidden;
+  border:1px solid var(--line-hi);
+  background:var(--mint-soft);
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+}
+.avatar-fallback{position:absolute;inset:0;display:grid;place-items:center;font:700 30px var(--mono);color:var(--mint)}
+.avatar-wrap img{position:relative;width:100%;height:100%;object-fit:cover}
+
+.name-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.name-line h1{font-size:30px;font-weight:800}
+.handle{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.badge{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);border:1px solid var(--line-hi);border-radius:999px;padding:3px 9px;background:var(--mint-soft)}
+
+.bio{margin-top:8px;color:var(--muted);max-width:46ch}
+.bio b{color:var(--text);font-weight:600}
+
+.status{margin-top:12px;display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 3px rgba(153,233,122,.16);animation:pulse 2.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(153,233,122,.05)}}
+
+.socials{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.social{
+  font-size:12.5px;padding:7px 13px;border-radius:10px;
+  border:1px solid var(--line);color:var(--muted);
+  transition:color .2s,border-color .2s,background .2s;
+}
+.social:hover{color:var(--text);border-color:var(--line-hi);background:rgba(255,255,255,.02)}
+.social.primary{color:#081008;background:var(--mint);border-color:var(--mint);font-weight:600}
+.social.primary:hover{background:#aef18f;color:#081008}
+
+/* ── terminal ────────────────────────── */
+.terminal{display:flex;flex-direction:column}
+.terminal-bar{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 14px;border-bottom:1px solid var(--line);
+  font:11px var(--mono);color:var(--muted-2);
+  background:rgba(0,0,0,.20);
+}
+.terminal-bar span:nth-child(2){flex:1;text-align:center;letter-spacing:.04em}
+.dots{display:flex;gap:5px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#20302a}
+.dots i:first-child{background:#3a2a25}
+.dots i:nth-child(2){background:#3a3722}
+.dots i:last-child{background:#243a2a}
+
+.terminal-body{padding:14px 16px 16px;font-family:var(--mono);font-size:12px;line-height:1.85;overflow-x:auto}
+.command{color:var(--text);margin-top:10px;white-space:nowrap}
+.command:first-child{margin-top:0}
+.command span{color:var(--mint)}
+.out{color:var(--muted);white-space:nowrap}
+.out b{color:var(--text);font-weight:500}
+.dim{color:var(--muted-2)}
+.mint{color:var(--mint)}
+.caret{display:inline-block;width:7px;height:14px;margin-left:5px;background:var(--mint);vertical-align:-2px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.palette{display:flex;gap:6px;margin-top:14px}
+.palette i{width:14px;height:14px;border-radius:4px}
+.palette i:nth-child(1){background:#99e97a}
+.palette i:nth-child(2){background:#5fae8a}
+.palette i:nth-child(3){background:#2c4a3c}
+.palette i:nth-child(4){background:#89988e}
+.palette i:nth-child(5){background:#eaf1eb}
+.palette i:nth-child(6){background:#12603f}
+.palette i:nth-child(7){background:#080d0b;border:1px solid var(--line)}
+
+/* ── sections ────────────────────────── */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:10px 2px 0}
+.section-head h2{font-size:15px;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;gap:9px}
+.section-head h2 span{color:var(--mint);font-size:12px}
+.section-head a{font-size:12px;color:var(--muted);border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.section-head a:hover{color:var(--mint);border-color:var(--line-hi)}
+
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.project{padding:16px 16px 15px;display:flex;flex-direction:column}
+.project-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.project-symbol{font-size:15px;color:var(--mint)}
+.project-state{font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mint);border:1px solid var(--line-hi);border-radius:999px;padding:2px 8px;background:var(--mint-soft)}
+.project-state.muted{color:var(--muted);border-color:var(--line);background:transparent}
+.project h3{font-size:16.5px;font-weight:700}
+.project h3 span{color:var(--muted-2);font-size:13px;transition:color .2s,transform .2s;display:inline-block}
+.project a:hover span{color:var(--mint);transform:translate(2px,-2px)}
+.project p{margin-top:8px;font-size:13px;color:var(--muted);flex:1}
+.project p b{color:var(--text);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.tags span{font:10.5px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 7px}
+
+/* ── mid: now + log ──────────────────── */
+.mid-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+.now,.log{padding:18px}
+.now h2,.log h2{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.now h2 span,.log h2 span{color:var(--mint);font-size:11px}
+.now-list{margin-top:14px;display:grid;gap:12px}
+.now-list li{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:start;padding-bottom:12px;border-bottom:1px dashed rgba(255,255,255,.06)}
+.now-list li:last-child{border-bottom:0;padding-bottom:0}
+.now-k{font:10.5px var(--mono);color:var(--mint);border:1px solid var(--line-hi);border-radius:6px;padding:3px 0;text-align:center;background:var(--mint-soft)}
+.now-list b{font-size:13.5px;font-weight:600}
+.now-list p{font-size:12.5px;color:var(--muted);margin-top:3px}
+
+.log-list{margin-top:14px;display:grid;gap:12px;font-size:13px}
+.log-list li{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:baseline}
+.log-list time{font:10.5px var(--mono);color:var(--muted-2)}
+.log-list p{color:var(--muted)}
+.log-list b{color:var(--text);font-weight:600}
+
+/* ── code ────────────────────────────── */
+.codeblock{padding:0}
+.code-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.2);font:11px var(--mono);color:var(--muted-2)}
+.code-head .file{color:var(--muted);flex:1}
+.code-head .lang{color:var(--mint);letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+.code-caption{padding:12px 16px 0;font-size:12.5px;color:var(--muted)}
+.codeblock pre{margin:0;padding:12px 16px 18px;overflow-x:auto;font:12.5px/1.75 var(--mono);color:#d7e3d9}
+.codeblock .c{color:var(--muted-2)}
+.codeblock .k{color:var(--mint)}
+.codeblock .n{color:#b8d4a0}
+.codeblock .f{color:#d9e9c2}
+
+/* ── bottom ──────────────────────────── */
+.bottom-grid{display:grid;grid-template-columns:1fr .8fr;gap:14px}
+.stack{padding:18px}
+.stack h2{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.stack h2 span{color:var(--mint);font-size:11px}
+.mini-label{font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-top:14px}
+.stack-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:9px}
+.stack-tags span{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 8px;
+  border:1px solid var(--line);border-radius:10px;font-size:12.5px;color:var(--muted);
+  transition:border-color .2s,color .2s,background .2s;
+}
+.stack-tags span:hover{border-color:var(--line-hi);color:var(--text);background:rgba(255,255,255,.02)}
+.stack-tags b{
+  display:grid;place-items:center;min-width:24px;height:24px;padding:0 4px;
+  border-radius:6px;background:var(--mint-soft);color:var(--mint);font:600 10.5px var(--mono);
+}
+
+.music{padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+.music-top{display:flex;align-items:center;justify-content:space-between;font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+.music-top span:last-child{font-size:13px;color:var(--muted);transition:color .2s}
+.music:hover .music-top span:last-child{color:var(--mint)}
+.equalizer{display:flex;align-items:flex-end;gap:3px;height:26px;margin:14px 0 10px}
+.equalizer i{width:4px;background:var(--mint);border-radius:2px;opacity:.7;animation:eq 1.1s ease-in-out infinite alternate}
+.equalizer i:nth-child(1){height:30%;animation-delay:0s}
+.equalizer i:nth-child(2){height:70%;animation-delay:.12s}
+.equalizer i:nth-child(3){height:45%;animation-delay:.24s}
+.equalizer i:nth-child(4){height:95%;animation-delay:.06s}
+.equalizer i:nth-child(5){height:60%;animation-delay:.3s}
+.equalizer i:nth-child(6){height:80%;animation-delay:.18s}
+.equalizer i:nth-child(7){height:35%;animation-delay:.36s}
+.equalizer i:nth-child(8){height:65%;animation-delay:.09s}
+@keyframes eq{to{height:14%;opacity:.35}}
+.music h2{font-size:18px;font-weight:700}
+.music p{font-size:12.5px;color:var(--muted);margin-top:4px}
+
+footer{
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px;
+  padding:16px 4px 0;border-top:1px solid var(--line);
+  font-size:12px;color:var(--muted-2);
+}
+footer span{flex:1}
+footer a,footer button{color:var(--muted);transition:color .2s}
+footer a:hover,footer button:hover{color:var(--mint)}
+
+/* ── intro ───────────────────────────── */
+.welcome{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;
+  background:radial-gradient(600px 400px at 50% 40%,#0d1713,#080d0b 70%);
+  transition:opacity .45s ease,visibility .45s;
+}
+.welcome.closing{opacity:0;visibility:hidden}
+html.intro-active{overflow:hidden}
+.welcome-brand{display:grid;justify-items:center;gap:18px;position:relative}
+.welcome-emblem{position:relative;width:112px;height:112px;display:grid;place-items:center}
+.welcome-ring{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--mint);stroke-width:1.5;opacity:.55;stroke-dasharray:465;stroke-dashoffset:465;animation:draw 1.2s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.welcome-emblem img{width:76px;height:76px;border-radius:20px;object-fit:cover;position:relative}
+.welcome-emblem .avatar-fallback{border-radius:20px}
+.welcome-greeting{font:600 15px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+
+/* ── reveal ──────────────────────────── */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media (max-width:940px){
+  .top-grid,.mid-grid,.bottom-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .workspace{padding:16px 14px 32px}
+  .name-line h1{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-<div class="welcome" id="welcome" hidden aria-label="Вступление xmaple">
-  <div class="welcome-curtain"></div>
-  <div class="welcome-brand"><div class="welcome-emblem"><svg class="welcome-ring" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74"/></svg><img id="welcome-avatar" src="./assets/avatar.png" width="112" height="112" alt="Аватар xmaple"></div><span class="welcome-greeting" id="welcome-greeting" aria-hidden="true">Привет</span></div>
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<div class="welcome" id="welcome" hidden aria-label="Приветствие">
+  <div class="welcome-brand">
+    <div class="welcome-emblem">
+      <svg class="welcome-ring" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74"/></svg>
+      <span class="avatar-fallback" aria-hidden="true">X</span>
+      <img id="welcome-avatar" src="./assets/avatar.png" width="76" height="76" alt="" onerror="this.remove()">
+    </div>
+    <span class="welcome-greeting" id="welcome-greeting" aria-hidden="true">Привет</span>
+  </div>
 </div>
-<link rel="stylesheet" href="./welcome.css?v=2">
-<script src="./welcome.js?v=3"></script>
-<canvas id="particles" aria-hidden="true"></canvas><div class="page-glow" aria-hidden="true"></div>
-<main class="workspace">
-<section class="top-grid">
-<article class="profile panel reveal">
-<div class="cover"><div class="cover-grid"></div><span class="cover-code">&lt;ideas /&gt;<br><b>create. learn. repeat.</b></span><span class="cover-orbit" aria-hidden="true">✳</span><span class="cover-index">XMAPLE / PERSONAL SPACE</span></div>
-<div class="profile-body"><div class="avatar-wrap"><img src="./assets/avatar.png" width="96" height="96" alt="Аватар xmaple"><span aria-hidden="true"></span></div><div class="name-line"><h1>xmaple</h1><span class="handle">@cryptoxmaple</span><span class="badge">самоучка</span></div><p class="lead">Software development & personal projects.</p><p class="bio">Изучаю Python, C++ и Kotlin. Работаю над своими проектами.</p><div class="socials"><a class="social primary" href="https://t.me/cryptoxmaple" target="_blank" rel="noopener">↗ Telegram</a><a class="social" href="https://github.com/xmaple52" target="_blank" rel="noopener">⌘ GitHub</a><a class="social" href="mailto:xmaplengg@gmail.com">@ Почта</a><a class="social" href="https://t.me/xmaple_core" target="_blank" rel="noopener">≡ Канал</a></div></div>
-</article>
-<aside class="terminal panel reveal" aria-label="Коротко обо мне"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span>about / xmaple</span><span>⌁</span></div><div class="terminal-body"><p class="command"><span>xmaple@home:~$</span> whoami<i class="caret"></i></p><dl><div><dt>Focus</dt><dd class="mint">Development</dd></div><div><dt>Approach</dt><dd>Programming</dd></div><div><dt>Current</dt><dd class="mint">Game development</dd></div><div><dt>Learning</dt><dd>Python, C++, Kotlin</dd></div><div><dt>Editor</dt><dd>VS Code</dd></div><div><dt>Contact</dt><dd><a href="https://t.me/cryptoxmaple">Telegram ↗</a></dd></div></dl><div class="palette" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></aside>
-</section>
-<section class="projects-section"><div class="section-head reveal"><h2><span>▣</span> Мои проекты</h2><a href="https://xmaple-projects.pages.dev/">Все подробности ↗</a></div><div class="projects-grid">
-<a class="project panel reveal" href="https://xmaple-projects.pages.dev/#current-work"><div class="project-top"><span class="project-symbol">⌖</span><span class="project-state">В разработке</span></div><h3>Офлайн-шутер <span>↗</span></h3><p>Сейчас делаю свою игру. Совмещаю разработку с учёбой, поэтому двигаюсь постепенно.</p><div class="tags"><span>Игра</span><span>В процессе</span></div></a>
-<a class="project panel reveal" href="https://xmaple-projects.pages.dev/#project-status"><div class="project-top"><span class="project-symbol">✳</span><span class="project-state muted">Разработка на паузе</span></div><h3>xmaple head <span>↗</span></h3><p>Моё AI-приложение и Telegram-бот. Продолжают работать, новые обновления пока на паузе.</p><div class="tags"><span>AI</span><span>v1.9.7</span></div></a>
-<a class="project panel reveal" href="https://xmaple-projects.pages.dev/#plugin"><div class="project-top"><span class="project-symbol">⌘</span><span class="project-state muted">Работает</span></div><h3>Коноплянка AI <span>↗</span></h3><p>AI-помощник прямо в чате AyuGram. Плагином можно пользоваться, активных обновлений пока нет.</p><div class="tags"><span>AyuGram</span><span>Плагин</span></div></a>
-</div></section>
-<section class="bottom-grid"><article class="stack panel reveal"><h2><span>⌨</span> Языки и инструменты</h2><p class="mini-label">ИЗУЧАЮ И ПРИМЕНЯЮ</p><div class="stack-tags"><span><b>Py</b> Python</span><span><b>++</b> C++</span><span><b>K</b> Kotlin</span><span><b>&lt;/&gt;</b> VS Code</span></div></article><a class="music panel reveal" href="https://open.spotify.com/playlist/66bpNhj2FzPKS8GfLCy8ES?si=22d7316563fd45cd" target="_blank" rel="noopener"><div class="music-top"><span class="mini-label">PLAYLIST</span><span>↗</span></div><div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h2>On repeat.</h2><p>Listen on Spotify <span>↗</span></p></a></section>
-<footer><button type="button" class="welcome-replay" id="welcome-replay">Повторить вступление ↻</button><span>xmaple © <span id="year">2026</span></span><a href="https://xmaple-projects.pages.dev/">Сайт проектов ↗</a><a href="https://t.me/cryptoxmaple">Написать мне ↗</a></footer>
-</main><script src="./tab-title.js?v=1"></script><script src="./main.js?v=2" defer></script></body></html>
+
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="page-glow" aria-hidden="true"></div>
+
+<main class="workspace" id="main">
+
+  <section class="top-grid">
+
+    <article class="profile panel reveal">
+      <div class="cover">
+        <div class="cover-grid"></div>
+        <span class="cover-code">&lt;ideas /&gt;<br><b>create. learn. repeat.</b></span>
+        <span class="cover-index">XMAPLE / PERSONAL SPACE</span>
+      </div>
+      <div class="profile-body">
+        <div class="avatar-wrap">
+          <span class="avatar-fallback" aria-hidden="true">X</span>
+          <img src="./assets/avatar.png" width="88" height="88" alt="Аватар xmaple" onerror="this.remove()">
+        </div>
+        <div class="name-line">
+          <h1>xmaple</h1>
+          <span class="handle">@cryptoxmaple</span>
+          <span class="badge">самоучка</span>
+        </div>
+        <p class="bio">Пишу на <b>Python</b>, <b>C++</b> и <b>Kotlin</b>. Сейчас разрабатываю <b>офлайн-шутер на Unity</b>. Ещё есть AI-бот и плагин для AyuGram и exteraGram.</p>
+        <p class="status"><i aria-hidden="true"></i> в разработке: офлайн-шутер на Unity</p>
+        <div class="socials">
+          <a class="social primary" href="https://t.me/cryptoxmaple" target="_blank" rel="noopener">↗ Telegram</a>
+          <a class="social" href="https://github.com/xmaple52" target="_blank" rel="noopener">⌘ GitHub</a>
+          <a class="social" href="https://xmaple-projects.pages.dev/">▣ Проекты</a>
+          <a class="social" href="mailto:xmaplengg@gmail.com">@ Почта</a>
+          <a class="social" href="https://t.me/xmaple_core" target="_blank" rel="noopener">≡ Канал</a>
+        </div>
+      </div>
+    </article>
+
+    <aside class="terminal panel reveal" aria-label="Коротко обо мне">
+      <div class="terminal-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>about.sh — xmaple</span>
+        <span aria-hidden="true">⌁</span>
+      </div>
+      <div class="terminal-body">
+        <p class="command"><span>xmaple@home:~$</span> whoami<i class="caret" aria-hidden="true"></i></p>
+        <p class="out">xmaple · C#, Python, Kotlin</p>
+        <p class="out dim">самоучка. пишу код и игры, а не резюме.</p>
+
+        <p class="command"><span>xmaple@home:~$</span> ls ~/now</p>
+        <p class="out"><b>shooter/</b> офлайн-шутер <span class="dim">// Unity, ранняя</span></p>
+        <p class="out"><b>head/</b> AI-бот <span class="dim">// v1.9.7, пауза</span></p>
+        <p class="out"><b>ayu/</b> плагин для AyuGram и exteraGram</p>
+
+        <p class="command"><span>xmaple@home:~$</span> echo $STACK</p>
+        <p class="out mint">C# · Unity · Python · Kotlin · Git</p>
+
+        <div class="palette" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </aside>
+
+  </section>
+
+  <section aria-labelledby="projects-title">
+    <div class="section-head reveal">
+      <h2 id="projects-title"><span>▣</span> Проекты</h2>
+      <a href="https://xmaple-projects.pages.dev/">Все подробности ↗</a>
+    </div>
+    <div class="projects-grid">
+
+      <article class="project panel reveal">
+        <div class="project-top">
+          <span class="project-symbol" aria-hidden="true">⌖</span>
+          <span class="project-state">в разработке</span>
+        </div>
+        <h3><a href="https://xmaple-projects.pages.dev/#current-work">Офлайн-шутер <span aria-hidden="true">↗</span></a></h3>
+        <p>Офлайн-шутер на Unity. Проект на раннем этапе разработки.</p>
+
+        <div class="tags"><span>Unity</span><span>C#</span><span>в разработке</span></div>
+      </article>
+
+      <article class="project panel reveal">
+        <div class="project-top">
+          <span class="project-symbol" aria-hidden="true">✳</span>
+          <span class="project-state muted">на паузе</span>
+        </div>
+        <h3><a href="https://xmaple-projects.pages.dev/#project-status">xmaple head <span aria-hidden="true">↗</span></a></h3>
+        <p>AI-приложение и телеграм-бот. Работает до сих пор, версия <b>v1.9.7</b>; новые фичи заморожены, пока делаю игру.</p>
+        <div class="tags"><span>Python</span><span>AI</span><span>Telegram API</span></div>
+      </article>
+
+      <article class="project panel reveal">
+        <div class="project-top">
+          <span class="project-symbol" aria-hidden="true">⌘</span>
+          <span class="project-state muted">работает</span>
+        </div>
+        <h3><a href="https://xmaple-projects.pages.dev/#plugin">Коноплянка AI <span aria-hidden="true">↗</span></a></h3>
+        <p>AI-помощник прямо в чате — работает на двух клиентах: <b>AyuGram</b> и <b>exteraGram</b>. Живой, но без активных обновлений.</p>
+        <div class="tags"><span>Kotlin</span><span>AyuGram</span><span>exteraGram</span><span>плагин</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="mid-grid">
+
+    <article class="now panel reveal">
+      <h2><span aria-hidden="true">▶</span> Сейчас в работе</h2>
+      <ul class="now-list">
+        <li>
+          <span class="now-k">шутер</span>
+          <div><b>Офлайн-шутер на Unity</b><p>Проект на раннем этапе. Разрабатываю игру и изучаю возможности движка.</p></div>
+        </li>
+        <li>
+          <span class="now-k">сайт</span>
+          <div><b>Эта страница</b><p>Переписал под реальные проекты и код: меньше воздуха, больше доказательств.</p></div>
+        </li>
+      </ul>
+    </article>
+
+    <article class="log panel reveal">
+      <h2><span aria-hidden="true">⧗</span> Журнал</h2>
+
+      <ol class="log-list">
+        <li><time datetime="2026-11">11.2026</time><p><b>Шутер:</b> ранняя разработка на Unity.</p></li>
+        <li><time datetime="2026-11">11.2026</time><p><b>xmaple head:</b> работает, обновления на паузе.</p></li>
+        <li><time datetime="2026-11">11.2026</time><p><b>Коноплянка AI:</b> плагин для AyuGram и exteraGram.</p></li>
+      </ol>
+    </article>
+
+  </section>
+
+  <section class="codeblock panel reveal" aria-labelledby="code-title">
+    <div class="code-head">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="file" id="code-title">Weapon.cs</span>
+      <span class="lang">C#</span>
+    </div>
+    <p class="code-caption">Хитскан с разбросом из шутера: попадание считается одним лучом, без пуль-объектов.</p>
+
+<pre><code><span class="c">// hitscan с конусом разброса — прототип оружия</span>
+<span class="k">public</span> <span class="k">bool</span> Fire(Vector3 origin, Vector3 forward, <span class="k">out</span> RaycastHit hit)
+{
+    <span class="k">var</span> spread = Quaternion.Euler(
+        Random.Range(-kick.x, kick.x),
+        Random.Range(-kick.y, kick.y),
+        0f);
+
+    <span class="k">var</span> dir = spread * forward;
+
+    <span class="k">return</span> Physics.Raycast(
+        origin, dir, <span class="k">out</span> hit, range,
+        hitMask, QueryTriggerInteraction.Ignore);
+}</code></pre>
+  </section>
+
+<section class="bottom-grid">
+
+    <article class="stack panel reveal">
+      <h2><span aria-hidden="true">⌨</span> Языки и инструменты</h2>
+      <p class="mini-label">Изучаю и применяю</p>
+      <div class="stack-tags">
+        <span><b>C#</b> Unity</span>
+        <span><b>Py</b> Python</span>
+        <span><b>++</b> C++</span>
+        <span><b>K</b> Kotlin</span>
+        <span><b>G</b> Git</span>
+        <span><b>&lt;/&gt;</b> VS Code</span>
+      </div>
+    </article>
+
+    <a class="music panel reveal" href="https://open.spotify.com/playlist/66bpNhj2FzPKS8GfLCy8ES?si=22d7316563fd45cd" target="_blank" rel="noopener">
+      <div class="music-top"><span>плейлист</span><span aria-hidden="true">↗</span></div>
+      <div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div>
+        <h2>On repeat.</h2>
+        <p>Слушать в Spotify <span aria-hidden="true">↗</span></p>
+      </div>
+    </a>
+
+  </section>
+
+  <footer>
+    <button type="button" id="welcome-replay">Повторить вступление ↻</button>
+    <span>xmaple © <span id="year">2026</span></span>
+    <a href="https://xmaple-projects.pages.dev/">Сайт проектов ↗</a>
+    <a href="tui.html">Вариант: терминал ↗</a>
+    <a href="editorial.html">Вариант: светлый ↗</a>
+    <a href="https://t.me/cryptoxmaple">Написать мне ↗</a>
+  </footer>
+
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "xmaple",
+  "alternateName": "@cryptoxmaple",
+  "url": "https://xmaple52.github.io/",
+  "email": "mailto:xmaplengg@gmail.com",
+  "knowsAbout": ["Unity", "C#", "Python", "C++", "Kotlin", "Game Development"],
+  "sameAs": [
+    "https://github.com/xmaple52",
+    "https://t.me/cryptoxmaple",
+    "https://t.me/xmaple_core",
+    "https://xmaple-projects.pages.dev/"
+  ]
+}
+</script>
+
+<script>
+/* год */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* reveal */
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  }
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* частицы */
+(() => {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  let w = 0, h = 0, dots = [], frame = 0;
+
+  function build() {
+    w = innerWidth; h = innerHeight;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    dots = Array.from({ length: w < 640 ? 20 : 44 }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: Math.random() * 1.3 + 0.4, v: Math.random() * 0.15 + 0.04
+    }));
+    draw();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(153,233,122,.22)';
+    for (const p of dots) {
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  function tick() {
+    for (const p of dots) { p.y -= p.v; if (p.y < -4) { p.y = h + 4; p.x = Math.random() * w; } }
+    draw();
+    frame = requestAnimationFrame(tick);
+  }
+  function sync() {
+    cancelAnimationFrame(frame);
+    if (document.hidden || reduce.matches) draw(); else tick();
+  }
+  addEventListener('resize', build, { passive: true });
+  document.addEventListener('visibilitychange', sync);
+  reduce.addEventListener('change', sync);
+  build(); sync();
+})();
+
+/* вступление: один раз на браузер, клик пропускает, reduced-motion выключает */
+(() => {
+  const overlay = document.getElementById('welcome');
+  const greeting = document.getElementById('welcome-greeting');
+  const replay = document.getElementById('welcome-replay');
+  const KEY = 'xmaple-intro-v1';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+  replay.addEventListener('click', () => {
+    try { localStorage.removeItem(KEY); } catch {}
+    location.reload();
+  });
+
+  let seen = false;
+  try { seen = localStorage.getItem(KEY) === '1'; } catch {}
+  if (seen || reduce.matches) return;
+
+  overlay.hidden = false;
+  document.documentElement.classList.add('intro-active');
+  try { localStorage.setItem(KEY, '1'); } catch {}
+
+  const words = ['Привет', 'Hello', 'Салам', 'Hola', 'こんにちは'];
+  let i = 0, closed = false, cycle = 0, closeTimer = 0;
+
+  function close() {
+    if (closed) return;
+    closed = true;
+    clearInterval(cycle);
+    clearTimeout(closeTimer);
+    overlay.classList.add('closing');
+    document.documentElement.classList.remove('intro-active');
+    setTimeout(() => { overlay.hidden = true; }, 500);
+  }
+
+  greeting.textContent = words[0];
+  cycle = setInterval(() => {
+    i = (i + 1) % words.length;
+    greeting.animate([{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-7px)' }], { duration: 110, fill: 'forwards' })
+      .finished.then(() => {
+        if (closed) return;
+        greeting.textContent = words[i];
+        greeting.animate([{ opacity: 0, transform: 'translateY(7px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 160, fill: 'forwards' });
+      }).catch(() => {});
+  }, 340);
+
+  closeTimer = setTimeout(close, 2100);
+  overlay.addEventListener('click', close);
+  addEventListener('keydown', (e) => { if (!closed) close(); }, { once: true });
+})();
+
+/* заголовок вкладки, когда уходишь */
+(() => {
+  const base = document.title;
+  document.addEventListener('visibilitychange', () => {
+    document.title = document.hidden ? 'заходи ещё ↺' : base;
+  });
+})();
+</script>
+</body>
+</html>
