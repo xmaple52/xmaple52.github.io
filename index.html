@@ -639,5 +639,26 @@ document.getElementById('year').textContent = new Date().getFullYear();
   setTimeout(close, 2400);
 })();
 </script>
+<script>
+(() => {
+  const name = '@cryptoxmaple';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let position = 0, timer;
+  function type() {
+    if (document.hidden || reduced.matches) { document.title = name; return; }
+    document.title = name.slice(0, ++position);
+    if (position < name.length) timer = setTimeout(type, 150);
+  }
+  function start() {
+    clearTimeout(timer);
+    if (document.hidden || reduced.matches) { document.title = name; return; }
+    position = 0;
+    type();
+  }
+  document.addEventListener('visibilitychange', start);
+  reduced.addEventListener('change', start);
+  start();
+})();
+</script>
 </body>
 </html>
