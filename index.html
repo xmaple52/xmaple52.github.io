@@ -217,6 +217,9 @@ body{
 .sec-head .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
 .sec-head a{font:10.5px var(--mono);color:var(--muted-2)}
 .sec-head a:hover{color:var(--mint)}
+.project-more{display:flex;justify-content:flex-end;margin-top:8px}
+.project-more a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;font:12px var(--mono);color:var(--mint)}
+.project-more a:hover{text-decoration:underline;text-underline-offset:4px}
 
 .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:inherit}
 .proj{padding:15px;display:flex;flex-direction:column;gap:9px}
@@ -336,7 +339,7 @@ body{
   html{scroll-behavior:auto}
   .eq i{height:40%!important}
 }
-@media(max-width:600px){.menubar{height:auto;min-height:31px;flex-wrap:wrap;padding:6px}.mini-projects{grid-template-columns:1fr}}
+@media(max-width:600px){.menubar{height:auto;min-height:31px;flex-wrap:wrap;padding:6px}}
 </style>
 </head>
 <body>
@@ -371,7 +374,7 @@ body{
   <nav class="menubar" aria-label="Меню">
     <a href="#content">Профиль</a>
     <a href="#projects">Проекты</a>
-    <a href="#mini-projects">Мини-проекты</a><a href="#now">Сейчас</a>
+    <a href="#now">Сейчас</a>
 
     <a href="#links">Связь</a>
     <span class="sp"></span>
@@ -465,9 +468,11 @@ body{
         </article>
 
       </div>
+      <div class="project-more">
+        <a href="https://github.com/xmaple52?tab=repositories" target="_blank" rel="noopener">Остальные проекты на GitHub <span aria-hidden="true">↗</span></a>
+      </div>
     </section>
 
-    <section id="mini-projects" aria-labelledby="mini-title"><div class="sec-head"><h2 id="mini-title">Мини-проекты · GitHub</h2><span class="rule" aria-hidden="true"></span><a href="https://github.com/xmaple52?tab=repositories" target="_blank" rel="noopener">все репозитории ↗</a></div><div class="projects mini-projects" style="margin-top:10px"><article class="card proj"><div class="proj-top"><span class="proj-ico" aria-hidden="true">&gt;_</span><span class="chip off">Python</span></div><h3><a href="https://github.com/xmaple52/link-lens" target="_blank" rel="noopener">link-lens ↗</a></h3><p><b>Проверка ссылок.</b> Проверяет HTTP-ссылки из файла и сохраняет CSV-отчёт.</p><div class="tags"><span>CSV</span><span>без зависимостей</span></div></article><article class="card proj"><div class="proj-top"><span class="proj-ico" aria-hidden="true">&gt;_</span><span class="chip off">Python</span></div><h3><a href="https://github.com/xmaple52/json-tidy" target="_blank" rel="noopener">json-tidy ↗</a></h3><p><b>Инструменты для JSON.</b> Проверяет, форматирует и сравнивает JSON-файлы.</p><div class="tags"><span>JSON</span><span>без зависимостей</span></div></article><article class="card proj"><div class="proj-top"><span class="proj-ico" aria-hidden="true">&gt;_</span><span class="chip off">Python</span></div><h3><a href="https://github.com/xmaple52/focus-clock" target="_blank" rel="noopener">focus-clock ↗</a></h3><p><b>Таймер фокусировки.</b> Рабочие сессии и перерывы с локальной историей.</p><div class="tags"><span>CLI</span><span>без зависимостей</span></div></article><article class="card proj"><div class="proj-top"><span class="proj-ico" aria-hidden="true">&gt;_</span><span class="chip off">Python</span></div><h3><a href="https://github.com/xmaple52/file-digest" target="_blank" rel="noopener">file-digest ↗</a></h3><p><b>Контрольные суммы.</b> Считает SHA-256 файла и сравнивает с ожидаемым значением.</p><div class="tags"><span>SHA-256</span><span>без зависимостей</span></div></article><article class="card proj"><div class="proj-top"><span class="proj-ico" aria-hidden="true">&gt;_</span><span class="chip off">Python</span></div><h3><a href="https://github.com/xmaple52/word-meter" target="_blank" rel="noopener">word-meter ↗</a></h3><p><b>Статистика текста.</b> Слова, символы, строки и примерное время чтения.</p><div class="tags"><span>UTF-8</span><span>без зависимостей</span></div></article><article class="card proj"><div class="proj-top"><span class="proj-ico" aria-hidden="true">&gt;_</span><span class="chip off">Python</span></div><h3><a href="https://github.com/xmaple52/color-notes" target="_blank" rel="noopener">color-notes ↗</a></h3><p><b>Контрастность цветов.</b> HEX в RGB и контраст текста по порогам WCAG.</p><div class="tags"><span>Colors</span><span>без зависимостей</span></div></article></div></section>
 
     <div class="duo" id="now">
 
