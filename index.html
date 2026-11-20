@@ -159,9 +159,6 @@ body{
 .bio{color:var(--muted);font-size:13.5px}
 .bio b{color:var(--text);font-weight:600}
 
-.status{display:inline-flex;align-items:center;gap:8px;font:11px var(--mono);color:var(--muted)}
-.status i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 3px rgba(153,233,122,.14);animation:pulse 2.4s infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(153,233,122,.04)}}
 
 .socials{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
 .btn{
@@ -217,11 +214,8 @@ body{
 .sec-head .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
 .sec-head a{font:10.5px var(--mono);color:var(--muted-2)}
 .sec-head a:hover{color:var(--mint)}
-.project-more{display:flex;justify-content:flex-end;margin-top:8px}
-.project-more a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;font:12px var(--mono);color:var(--mint)}
-.project-more a:hover{text-decoration:underline;text-underline-offset:4px}
 
-.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:inherit}
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:inherit;margin-top:10px}
 .proj{padding:15px;display:flex;flex-direction:column;gap:9px}
 .proj-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .proj-ico{
@@ -230,25 +224,13 @@ body{
 }
 .proj h3{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
 .proj h3 a:hover{color:var(--mint)}
+.project-arrow{color:var(--mint-dim);font:12px var(--mono)}
 .proj p{font-size:12.5px;color:var(--muted);flex:1}
 .proj p b{color:var(--text);font-weight:600}
 .tags{display:flex;flex-wrap:wrap;gap:5px}
 .tags span{font:10px var(--mono);color:var(--muted-2);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
 
 /* низ */
-.duo{display:grid;grid-template-columns:1.1fr .9fr;gap:inherit}
-.pane{padding:16px}
-.pane h3{font:600 10.5px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
-.pane h3::before{content:'';width:5px;height:5px;background:var(--mint);border-radius:1px}
-.list{margin-top:12px;display:grid;gap:11px}
-.list li{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:start;padding-bottom:11px;border-bottom:1px dashed rgba(255,255,255,.06)}
-.list li:last-child{border:0;padding-bottom:0}
-.key{font:9.5px var(--mono);letter-spacing:.06em;color:var(--mint);border:1px solid #2b4a37;border-radius:4px;padding:2px 0;text-align:center;background:var(--mint-soft)}
-.list b{font-size:13px;font-weight:600;display:block}
-.list p{font-size:12px;color:var(--muted);margin-top:2px}
-.log li{grid-template-columns:58px 1fr;border-bottom:0;padding-bottom:0}
-.log time{font:10px var(--mono);color:var(--muted-2)}
-.log p{font-size:12.5px;color:var(--muted);margin:0}
 
 /* код */
 .code-card{overflow:hidden}
@@ -320,7 +302,7 @@ body{
 .win.min .titlebar{border-radius:8px}
 
 @media (max-width:900px){
-  .hero,.duo{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr}
   .projects{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(4,1fr)}
   .menubar{overflow-x:auto;scrollbar-width:none}
@@ -332,7 +314,7 @@ body{
   .inner{border-radius:0}
   .statusbar{display:none}
   .stats{grid-template-columns:repeat(2,1fr)}
-  .hero,.duo,.projects{gap:10px}
+  .hero,.projects{gap:10px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -374,8 +356,6 @@ body{
   <nav class="menubar" aria-label="Меню">
     <a href="#content">Профиль</a>
     <a href="#projects">Проекты</a>
-    <a href="#now">Сейчас</a>
-
     <a href="#links">Связь</a>
     <span class="sp"></span>
     <span class="stat">v1.0 · UTF-8</span>
@@ -395,16 +375,13 @@ body{
             <h1>xmaple</h1>
             <p class="handle">@cryptoxmaple</p>
             <div class="chips">
-              <span class="chip"><i></i> самоучка</span>
               <span class="chip"><i></i> unity</span>
               <span class="chip off"><i></i> открыт к идеям</span>
             </div>
           </div>
         </div>
 
-        <p class="bio">Изучаю <b>C# и Unity</b>, <b>Python</b> и <b>C++</b>. Делаю офлайн-шутер. Ещё есть xmaple head и плагин для AyuGram и exteraGram.</p>
-
-        <p class="status"><i aria-hidden="true"></i> в разработке: офлайн-шутер на Unity</p>
+        <p class="bio">Изучаю <b>C#</b>, <b>Python</b> и <b>C++</b>.</p>
 
         <div class="socials">
           <a class="btn primary" href="https://t.me/cryptoxmaple" target="_blank" rel="noopener">telegram ↗</a>
@@ -435,16 +412,16 @@ body{
         <span class="rule" aria-hidden="true"></span>
         <a href="https://xmaple-projects.pages.dev/">все подробности ↗</a>
       </div>
-      <div class="projects" style="margin-top:10px">
+      <div class="projects">
 
         <article class="card proj">
           <div class="proj-top">
             <span class="proj-ico" aria-hidden="true">⌖</span>
-            <span class="chip"><i></i> ранняя</span>
+            <span class="chip"><i></i> в разработке</span>
           </div>
-          <h3><a href="https://xmaple-projects.pages.dev/#current-work">Офлайн-шутер</a></h3>
-          <p>Офлайн-шутер на <b>Unity</b>. Проект на раннем этапе. Разработку совмещаю с учёбой.</p>
-          <div class="tags"><span>Unity</span><span>C#</span><span>в разработке</span></div>
+          <h3><a href="https://xmaple-projects.pages.dev/#current-work">Офлайн-шутер <span class="project-arrow" aria-hidden="true">↗</span></a></h3>
+          <p>Игра на <b>Unity</b>.</p>
+          <div class="tags"><span>Unity</span><span>C#</span></div>
         </article>
 
         <article class="card proj">
@@ -452,7 +429,7 @@ body{
             <span class="proj-ico" aria-hidden="true">✳</span>
             <span class="chip off"><i></i> пауза</span>
           </div>
-          <h3><a href="https://xmaple-projects.pages.dev/#project-status">xmaple head</a></h3>
+          <h3><a href="https://xmaple-projects.pages.dev/#project-status">xmaple head <span class="project-arrow" aria-hidden="true">↗</span></a></h3>
           <p>AI-приложение и Telegram-бот. Текущая версия <b>v1.9.7</b>; разработка обновлений на паузе.</p>
           <div class="tags"><span>Python</span><span>AI</span><span>Telegram</span></div>
         </article>
@@ -462,39 +439,13 @@ body{
             <span class="proj-ico" aria-hidden="true">⌘</span>
             <span class="chip off"><i></i> работает</span>
           </div>
-          <h3><a href="https://xmaple-projects.pages.dev/#plugin">Коноплянка AI</a></h3>
+          <h3><a href="https://xmaple-projects.pages.dev/#plugin">Коноплянка AI <span class="project-arrow" aria-hidden="true">↗</span></a></h3>
           <p>AI-помощник прямо в чате — на двух клиентах: <b>AyuGram</b> и <b>exteraGram</b>. Работает. Обновления пока на паузе.</p>
           <div class="tags"><span>Kotlin</span><span>AyuGram</span><span>exteraGram</span></div>
         </article>
 
       </div>
-      <div class="project-more">
-        <a href="https://github.com/xmaple52?tab=repositories" target="_blank" rel="noopener">Остальные проекты на GitHub <span aria-hidden="true">↗</span></a>
-      </div>
     </section>
-
-
-    <div class="duo" id="now">
-
-      <article class="card pane">
-        <h3>Сейчас в работе</h3>
-        <ul class="list">
-          <li><span class="key">шутер</span><div><b>Офлайн-шутер на Unity</b><p>Работаю над своей игрой. Проект на раннем этапе разработки.</p></div></li>
-          <li><span class="key">сайт</span><div><b>Эта страница</b><p>Личная страница, ссылки на проекты и небольшие утилиты на GitHub.</p></div></li>
-        </ul>
-      </article>
-
-      <article class="card pane">
-        <h3>Журнал</h3>
-
-        <ul class="list log">
-          <li><time datetime="2026-11">11.2026</time><p>Шутер: ранняя разработка на Unity.</p></li>
-          <li><time datetime="2026-11">11.2026</time><p>xmaple head: работает, обновления на паузе.</p></li>
-          <li><time datetime="2026-11">11.2026</time><p>Коноплянка AI: плагин для AyuGram и exteraGram.</p></li>
-        </ul>
-      </article>
-
-    </div>
 
     <div class="card stackcard">
       <span class="lbl">стек</span>
